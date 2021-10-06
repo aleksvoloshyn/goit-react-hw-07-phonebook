@@ -5,16 +5,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import s from './ContactList.module.css';
+import * as contactsSelectors from '../../redux/contacts/contactsSelectors';
 
 function ContactList({ deleteContact }) {
   // function ContactList({ contacts, deleteContact }) {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.entities);
-  console.log(contacts);
+  const contacts = useSelector(contactsSelectors.getContacts);
 
   useEffect(() => {
     dispatch(contactsOperations.fetchContacts());
-    console.log(contacts);
   }, [dispatch]);
 
   return (
