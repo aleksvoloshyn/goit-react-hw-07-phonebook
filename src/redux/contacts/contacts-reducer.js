@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import actions from './contacts-actions';
+import * as contactsActions from './contacts-actions';
+
 import {
   onDeleteNotification,
   onSuccsessNotification,
@@ -42,4 +44,27 @@ const filter = createReducer([], {
   [actions.filter]: (_, action) => [action.payload.toLowerCase()],
 });
 
-export default combineReducers({ items, filter });
+// export default combineReducers({ items, filter });
+
+const entities = createReducer([], {
+  [contactsActions.fetchContactsSuccess]: (state, action) => action.payload,
+});
+
+const isLoading = createReducer(false, {
+  [contactsActions.fetchContactsRequest]: () => true,
+  [contactsActions.fetchContactsSuccess]: () => false,
+  [contactsActions.fetchContactsError]: () => false,
+});
+
+const error = createReducer(null, {
+  [contactsActions.fetchContactsError]: (_, action) => action.payload,
+  [contactsActions.fetchContactsRequest]: () => null,
+});
+
+export default combineReducers({
+  entities,
+  isLoading,
+  error,
+  filter,
+  items,
+});

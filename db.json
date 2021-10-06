@@ -1,3 +1,7 @@
 {
-  "contacts": []
+  "contacts": [
+    { "id": "id-101", "name": "Yuriy Stupin", "number": "459-12-56" },
+    { "id": "id-202", "name": "Dmytriy Zub", "number": "443-89-12" },
+    { "id": "id-203", "name": "Sergey Kotelevets", "number": "645-17-79" }
+  ]
 }
