@@ -21,5 +21,5 @@ const store = configureStore({
   },
 });
 
-// console.log(store);
+// console.log(store);s
 export default store;

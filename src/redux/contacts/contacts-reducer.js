@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
-import { createReducer } from '@reduxjs/toolkit';
+import { createReducer, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import actions from './contacts-actions';
 import * as contactsActions from './contacts-actions';
+import { fetchContacts, addItem } from './contacts-operations';
+import { addContacts } from './../../contacts-api';
 
 import {
   onDeleteNotification,
@@ -17,19 +19,23 @@ const defaultContacts = [
   { id: 'id-5', name: 'Asusena', number: '227-91-236' },
 ];
 
-const items = createReducer(defaultContacts, {
+const items = createReducer([], {
   [actions.addContact]: (state, action) => {
-    if (
-      state.find(cont => {
-        return cont.name === action.payload.name;
-      })
-    ) {
-      onErrorNotification();
-      return [...state];
-    } else {
-      onSuccsessNotification();
-      return [action.payload, ...state];
-    }
+    // if (
+    //   state.find(cont => {
+    //     return cont.name === action.payload.name;
+    //   })
+    // ) {
+    //   onErrorNotification();
+    //   return [...state];
+    // } else {
+    //   onSuccsessNotification();
+
+    //   return [action.payload, ...state];
+    // }
+    console.log(action.payload);
+
+    addContacts(action.payload);
   },
 
   [actions.deleteContact]: (state, action) => {
@@ -47,18 +53,26 @@ const filter = createReducer([], {
 // export default combineReducers({ items, filter });
 
 const entities = createReducer([], {
-  [contactsActions.fetchContactsSuccess]: (state, action) => action.payload,
+  // [contactsActions.fetchContactsSuccess]: (state, action) => action.payload,
+  [fetchContacts.fulfilled]: (state, action) => {
+    return action.payload;
+  },
 });
 
 const isLoading = createReducer(false, {
-  [contactsActions.fetchContactsRequest]: () => true,
-  [contactsActions.fetchContactsSuccess]: () => false,
-  [contactsActions.fetchContactsError]: () => false,
+  // [contactsActions.fetchContactsRequest]: () => true,
+  // [contactsActions.fetchContactsSuccess]: () => false,
+  // [contactsActions.fetchContactsError]: () => false,
+  [fetchContacts.pending]: () => true,
+  [fetchContacts.fulfilled]: () => false,
+  [fetchContacts.rejected]: () => false,
 });
 
 const error = createReducer(null, {
-  [contactsActions.fetchContactsError]: (_, action) => action.payload,
-  [contactsActions.fetchContactsRequest]: () => null,
+  // [contactsActions.fetchContactsError]: (_, action) => action.payload,
+  // [contactsActions.fetchContactsRequest]: () => null,
+  [fetchContacts.rejected]: (_, action) => action.payload,
+  [fetchContacts.pending]: () => null,
 });
 
 export default combineReducers({
@@ -66,5 +80,6 @@ export default combineReducers({
   isLoading,
   error,
   filter,
+  // addContact,
   items,
 });

@@ -37,7 +37,7 @@ const App = ({ contacts, filter, addItem, onDeleteContact }) => {
   );
 };
 
-const mapStateToProps = ({ contacts: { items, filter } }) => ({
+const mapStateToProps = ({ contacts: { entities, items, filter } }) => ({
   contacts: items,
   filter: filter,
 });

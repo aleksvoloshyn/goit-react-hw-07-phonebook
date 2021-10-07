@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 // import * as contactsApi from "./../../contacts-api"
+import * as contactsSelectors from '../../redux/contacts/contactsSelectors';
 import * as contactsOperations from './../../redux/contacts/contacts-operations';
+// import { contactsSelectors, contactsOperations } from './../../redux/contacts';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import s from './ContactList.module.css';
-import * as contactsSelectors from '../../redux/contacts/contactsSelectors';
 
 function ContactList({ deleteContact }) {
   // function ContactList({ contacts, deleteContact }) {
@@ -14,7 +15,7 @@ function ContactList({ deleteContact }) {
 
   useEffect(() => {
     dispatch(contactsOperations.fetchContacts());
-  }, [dispatch]);
+  }, [dispatch, contacts]);
 
   return (
     <div>
