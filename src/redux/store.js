@@ -19,6 +19,8 @@ const store = configureStore({
   reducer: {
     contacts: contactsReducer,
   },
+  middleware: middleware,
+  devTools: process.env.NODE_ENV === 'development',
 });
 
 // console.log(store);s

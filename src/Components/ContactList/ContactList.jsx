@@ -1,21 +1,17 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 // import * as contactsApi from "./../../contacts-api"
 import * as contactsSelectors from '../../redux/contacts/contactsSelectors';
-import * as contactsOperations from './../../redux/contacts/contacts-operations';
-// import { contactsSelectors, contactsOperations } from './../../redux/contacts';
-import { useSelector, useDispatch } from 'react-redux';
+
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import s from './ContactList.module.css';
+import { deleteContact } from './../../redux/contacts/contacts-operations';
+import { useDispatch } from 'react-redux';
 
-function ContactList({ deleteContact }) {
-  // function ContactList({ contacts, deleteContact }) {
+function ContactList() {
+  const contacts = useSelector(contactsSelectors.filteredContacts);
   const dispatch = useDispatch();
-  const contacts = useSelector(contactsSelectors.getContacts);
-
-  useEffect(() => {
-    dispatch(contactsOperations.fetchContacts());
-  }, [dispatch, contacts]);
 
   return (
     <div>
@@ -26,7 +22,10 @@ function ContactList({ deleteContact }) {
               <li className={s.contactList__item} key={cont.id}>
                 <span className={s.contactList__name}>{cont.name}</span>
                 <span className={s.contactList__number}>{cont.number}</span>
-                <Button variant="danger" onClick={() => deleteContact(cont.id)}>
+                <Button
+                  variant="danger"
+                  onClick={() => dispatch(deleteContact(cont.id))}
+                >
                   Delete
                 </Button>
               </li>

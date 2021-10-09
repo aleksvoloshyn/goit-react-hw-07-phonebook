@@ -8,43 +8,40 @@ import ReactNotifications from 'react-notifications-component';
 import s from './../src/Components/Container/Container.module.css';
 import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
-import { connect } from 'react-redux';
-import contactsActions from './redux/contacts/contacts-actions';
+import { useEffect } from 'react';
+import {
+  fetchContacts,
+  addContact,
+} from './../src/redux/contacts/contacts-operations';
+import { useDispatch } from 'react-redux';
 
-const App = ({ contacts, filter, addItem, onDeleteContact }) => {
-  const getFilteredResult = (contacts, filter) => {
-    return contacts.filter(contact => {
-      return contact.name.toLowerCase().includes(filter);
-    });
-  };
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <div className="App">
       <ReactNotifications />
       <Container>
         <h1 className={s.container__label}>Phonebook</h1>
-        <ContactForm onSubmit={addItem} />
+        <ContactForm onSubmit={item => dispatch(addContact(item))} />
 
         <h2 className={s.container__contacts}>Contacts</h2>
 
         <Filter />
-        <ContactList
-          contacts={getFilteredResult(contacts, filter)}
-          deleteContact={onDeleteContact}
-        />
+        <ContactList />
       </Container>
     </div>
   );
 };
 
-const mapStateToProps = ({ contacts: { entities, items, filter } }) => ({
-  contacts: items,
-  filter: filter,
-});
+// const mapDispatchToProps = dispatch => ({
+//   addItem: item => dispatch(contactsActions.addContact(item)),
+//   onDeleteContact: item => dispatch(contactsActions.deleteContact(item)),
+// });
 
-const mapDispatchToProps = dispatch => ({
-  addItem: item => dispatch(contactsActions.addContact(item)),
-  onDeleteContact: item => dispatch(contactsActions.deleteContact(item)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default connect(null, mapDispatchToProps)(App);
+export default App;

@@ -1,29 +1,29 @@
 {
   "contacts": [
     {
-      "id": "id-101",
-      "name": "Yuriy Stupin",
-      "number": "459-12-56"
+      "id": "5b8d99e1-8a6b-47c2-91a5-c86647b7b2b7",
+      "name": "John Snow",
+      "number": "+380935007030"
     },
     {
-      "id": "id-202",
-      "name": "Dmytriy Zub",
-      "number": "443-89-12"
-    },
-    {
-      "id": "id-203",
-      "name": "Sergey Kotelevets",
-      "number": "645-17-79"
-    },
-    {
-      "id": "21211d5a-06d4-4fa4-a9e4-3a3d1c2ae97a",
-      "name": "asusena",
+      "id": "0991dfa3-f2cc-4b04-a1d3-11b816a43fd0",
+      "name": "Bugs Bunny",
       "number": "093-5007030"
     },
     {
-      "id": "a25a20d3-a592-4393-9970-3ae417771914",
-      "name": "PlaShta",
+      "id": "911444bb-952e-42d8-a510-75ea8099ad85",
+      "name": "Donald Duck",
       "number": "+380935007030"
+    },
+    {
+      "id": "ea3378c0-51a1-4632-80bf-b5d9b3aa0551",
+      "name": "Anchous",
+      "number": "+380935007030"
+    },
+    {
+      "id": "a3833042-e130-49ac-ae48-5d2e4feb2c74",
+      "name": "PlaShta Outlet",
+      "number": "093-5007030"
     }
   ]
 }
